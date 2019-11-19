@@ -1,8 +1,10 @@
+<%@page import="kr.co.board1.bean.BoardMemberBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	// 세션에 사용자 정보 유무를 확인
-	
-	if(true){
+	BoardMemberBean bmb = (BoardMemberBean) session.getAttribute("member");
+
+	if(bmb == null){
 		// 로그인을 안했으면
 		pageContext.forward("/Board1/user/login.jsp");
 	}else{
