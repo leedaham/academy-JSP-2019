@@ -1,3 +1,6 @@
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="kr.co.board1.config.SQL"%>
+<%@page import="kr.co.board1.config.DBConfig"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -15,39 +18,31 @@
 	String addr1 =request.getParameter("addr1");
 	String addr2 =request.getParameter("addr2");
 	String regip =request.getRemoteAddr();
-	//DB 정보
-	String host = "jdbc:mysql://192.168.44.9/ldh";
-	String user = "ldh";
-	String pass = "1234";
 	
-	// 1단계
-	Class.forName("com.mysql.jdbc.Driver");
-	
-	// 2단계
-	Connection conn = DriverManager.getConnection(host, user, pass);
+	// 1, 2단계
+	Connection conn = DBConfig.getConnection();
 	
 	// 3단계
-	Statement stmt = conn.createStatement();
-	// 4단계
-	String sql  = "INSERT INTO `BOARD_MEMBER` SET ";
-		   sql += "`uid`='"+uid+"',";
-		   sql += "`pass`=PASSWORD('"+pass1+"'),";
-		   sql += "`name`='"+name+"',";
-		   sql += "`nick`='"+nick+"',";
-		   sql += "`email`='"+email+"',";
-		   sql += "`hp`='"+hp+"',";
-		   sql += "`zip`='"+zip+"',";
-		   sql += "`addr1`='"+addr1+"',";
-		   sql += "`addr2`='"+addr2+"',";
-		   sql += "`regip`='"+regip+"',";
-		   sql += "`rdate`=NOW();";
+	PreparedStatement psmt = conn.prepareStatement(SQL.INSERT_USER);
+	psmt.setString(1, uid);
+	psmt.setString(2, pass1);
+	psmt.setString(3, name);
+	psmt.setString(4, nick);
+	psmt.setString(5, email);
+	psmt.setString(6, hp);
+	psmt.setString(7, zip);
+	psmt.setString(8, addr1);
+	psmt.setString(9, addr2);
+	psmt.setString(9, regip);
 	
-  	stmt.executeUpdate(sql);
+	
+	// 4단계	
+  	psmt.executeUpdate();
   	
 	// 5단계
 	
 	// 6단계
-	stmt.close();
+	psmt.close();
 	conn.close();
 	
 	response.sendRedirect("/Board1/user/login.jsp");

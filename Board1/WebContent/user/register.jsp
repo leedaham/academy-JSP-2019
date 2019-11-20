@@ -13,6 +13,12 @@
 		<script src="/Board1/js/validation.js"></script>
 		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script src="/Board1/js/zipcode.js"></script>
+		<script src="/Board1/js/checkUid.js"></script>
+		<script src="/Board1/js/checkHp.js"></script>
+		<script src="/Board1/js/checkNick.js"></script>
+		<script src="/Board1/js/checkEmail.js"></script>
+
+		
 </head>
 	<body>
 		<div id="member">
@@ -57,11 +63,17 @@
 							</tr>
 							<tr>
 								<td>EMAIL</td>
-								<td><input type="email" name="email" placeholder="이메일을 입력" 	required /></td>
+								<td>
+									<input type="email" name="email" placeholder="이메일을 입력" 	required />
+									<span class="resultEmail"></span>
+								</td>
 							</tr>
 							<tr>
 								<td>휴대폰</td>
-								<td><input type="text" name="hp" placeholder="-포함 13자리를 입력" maxlength="13" required /></td>
+								<td>
+									<input type="text" name="hp" placeholder="-포함 13자리를 입력" maxlength="13" required />
+									<span class="resultHp"></span>
+								</td>
 							</tr>
 							<tr>
 								<td>주소</td>
@@ -82,7 +94,7 @@
 			
 					</section>
 					<div>
-						<a href="#" class="cancel">취소</a> 
+						<a href="/Board1/user/login.jsp" class="cancel">취소</a> 
 						<input type="submit" class="join" value="회원가입" />
 					</div>
 				</form>
