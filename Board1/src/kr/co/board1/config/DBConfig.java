@@ -8,7 +8,7 @@ public class DBConfig {
 	//DB 정보
 	private static final String HOST = "jdbc:mysql://192.168.44.9/ldh";
 	private static final String USER = "ldh";
-	private static final String PASS = "12345";
+	private static final String PASS = "1234";
 	
 	public static Connection getConnection() throws Exception{
 		// 1단계
