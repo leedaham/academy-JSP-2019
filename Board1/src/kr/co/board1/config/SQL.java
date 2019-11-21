@@ -21,13 +21,27 @@ public class SQL {
 	public static final String SELECT_CHECK_EMAIL 	= "SELECT COUNT(*) FROM `BOARD_MEMBER` WHERE `email`=?";
 	public static final String SELECT_CHECK_HP 		= "SELECT COUNT(*) FROM `BOARD_MEMBER` WHERE `hp`=?";
 	// 게시물 관련
+	public static final String SELECT_ARTICLE_LIST = "SELECT a.*, b.nick FROM `BOARD_ARTICLE` "
+												   + "AS a JOIN `BOARD_MEMBER` "
+												   + "AS b ON a.uid = b.uid "
+												   + "ORDER BY seq DESC";
+	public static final String SELECT_ARTICLE_VIEW = "SELECT * FROM `BOARD_ARTICLE` WHERE `seq`=?";
+	public static final String UPDATE_ARTICLE_HIT = "UPDATE `BOARD_ARTICLE` SET `hit`=`hit`+1 WHERE `seq`=?";
+	
 	public static final String INSERT_ARTICLE  = "INSERT INTO `BOARD_ARTICLE` SET "
-											   + "`parent`=0,"	
-											   + "`cate`='free',"	
-											   + "`title`='?',"	
-											   + "`content`='?',"	
-											   + "`file`=0,"	
-											   + "`uid`='?',"	
-											   + "`regip`='?',"	
+											   + "`parent`=?,"	
+											   + "`cate`=?,"	
+											   + "`title`=?,"	
+											   + "`content`=?,"	
+											   + "`file`=?,"	
+											   + "`uid`=?,"	
+											   + "`regip`=?,"	
 											   + "`rdate`=NOW();";	
+	
+	public static final String INSERT_COMMENT = "INSERT INTO `BOARD_ARTICLE` SET "
+			                                  + "`parent`=?, "
+			                                  + "`content`=?, "
+			                                  + "`uid`=?, "
+			                                  + "`regip`=?, "
+			                                  + "`rdate`=NOW()";
 }

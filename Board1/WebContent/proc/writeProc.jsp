@@ -13,7 +13,7 @@
 	String content	=request.getParameter("content");
 	String regip	=request.getRemoteAddr();
 	
-	BoardMemberBean bmb = (BoardMemberBean) session.getAttribute("member");
+	BoardMemberBean bmb = (BoardMemberBean)session.getAttribute("member");
 	String uid = bmb.getUid();
 	
 	// 1, 2단계
@@ -38,5 +38,5 @@
 	conn.close();
 	
 	// list 페이지 이동
-	response.sendRedirect("./list.jsp");
+	response.sendRedirect("../list.jsp");
 %>

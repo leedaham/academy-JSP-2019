@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DBConfig {
 	
 	//DB Á¤º¸
-	private static final String HOST = "jdbc:mysql://192.168.44.9/ldh";
+	private static final String HOST = "jdbc:mysql://192.168.44.3/ldh";
 	private static final String USER = "ldh";
 	private static final String PASS = "1234";
 	
