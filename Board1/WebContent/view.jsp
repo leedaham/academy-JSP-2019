@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="kr.co.board1.bean.BoardArticleBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kr.co.board1.config.SQL"%>
@@ -31,9 +33,14 @@
 	PreparedStatement psmtHit = conn.prepareStatement(SQL.UPDATE_ARTICLE_HIT);
 	psmtHit.setString(1, seq);
 	
+	PreparedStatement psmtComment = conn.prepareStatement(SQL.SELECT_COMMENT_LIST);
+	psmtComment.setString(1, seq);
+	
 	// 4 단계
 	ResultSet rs = psmtView.executeQuery();
+	ResultSet rsComment =  psmtComment.executeQuery();
 	psmtHit.executeUpdate();
+	
 	
 	// 트랜잭션 끈(실행)
 	conn.commit();
@@ -57,6 +64,25 @@
 	}
 	
 	
+	
+	List<BoardArticleBean> commentList = new ArrayList<>();
+	while(rsComment.next()){
+		BoardArticleBean comment = new BoardArticleBean();
+		comment.setSeq(rsComment.getInt(1));
+		comment.setParent(rsComment.getInt(2));
+		comment.setComment(rsComment.getInt(3));
+		comment.setCate(rsComment.getString(4));
+		comment.setTitle(rsComment.getString(5));
+		comment.setContent(rsComment.getString(6));
+		comment.setFile(rsComment.getInt(7));
+		comment.setHit(rsComment.getInt(8));
+		comment.setUid(rsComment.getString(9));
+		comment.setRegip(rsComment.getString(10));
+		comment.setRdate(rsComment.getString(11));
+		
+		commentList.add(comment);
+	}
+	
 	// 6 단계
 	rs.close();
 	psmtView.close();
@@ -71,6 +97,10 @@
 		<meta charset="UTF-8" />
 		<title>글보기</title> 
 		<link rel="stylesheet" href="/Board1/css/style.css" />
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	</head>
 	<body>
 		<div id="board">
@@ -101,8 +131,8 @@
 						</tr>
 					</table>
 					<div class="btns">
-						<a href="#" class="cancel del">삭제</a>
-						<a href="#" class="cancel mod">수정</a>
+						<a href="./proc/deleteProc.jsp?seq=<%=seq %>" class="cancel del">삭제</a>
+						<a href="./modify.jsp?seq=<%=seq %>" class="cancel mod">수정</a>
 						<a href="./list.jsp" class="cancel">목록</a>
 					</div>
 				</form>
@@ -111,23 +141,25 @@
 			<!-- 댓글리스트 -->
 			<section class="comments">
 				<h3>댓글목록</h3>
-				<!-- 
+				
+				<% for(BoardArticleBean comment : commentList){ %>
 				<div class="comment">
 					<span>
-						<span>홍길동</span>
-						<span>18-03-01</span>
+						<span><%=comment.getUid() %></span>
+						<span><%=comment.getRdate().substring(2, 10) %></span>
 					</span>
-					<textarea>테스트 댓글입니다.</textarea>
+					<textarea><%=comment.getContent() %></textarea>
 					<div>
-						<a href="#" class="del">삭제</a>
+						<a href="./proc/deleteCommentProc.jsp?seq=<%=comment.getSeq() %>&parent=<%=comment.getParent() %>" class="del">삭제</a>
 						<a href="#" class="mod">수정</a>
 					</div>
 				</div>
-				 -->
+				<%} %>
+				<% if(commentList.size() == 0) { %>
 				<p class="empty">
 					등록된 댓글이 없습니다.
 				</p>
-				
+				<%} %>
 			</section>
 			
 			<!-- 댓글쓰기 -->
@@ -144,6 +176,58 @@
 					</form>
 				</div>
 			</section>
+			
+			
+			<script>
+			$(document).ready(function(){
+				
+				$('.comment_write input[type=submit]').click(function(e){
+					e.preventDefault();
+					
+					// 태그객체 생성
+					var comments = $('section.comments');
+					
+					// 전송할 데이터 수집
+					var input    = $('.comment_write input[name=seq]');
+					var textarea = $('.comment_write textarea');
+					
+					var seq     = input.val();
+					var comment = textarea.val();
+					
+					if(comment == ''){
+						alert('댓글을 입력하십시요.');
+						return;
+					}
+					
+					var json = {"seq":seq, "comment":comment};
+					
+					$.ajax({
+						
+						url: '/Board1/proc/commentProc.jsp',
+						type: 'post',
+						data: json,
+						dataType: 'json',
+						success: function(data){
+							
+							textarea.val('');
+							
+							
+							
+						}
+						
+						
+					});
+					
+					
+					
+					
+				});
+				
+				
+			});
+				
+			</script>
+			
 		</div><!-- board 끝 -->
 	</body>
 

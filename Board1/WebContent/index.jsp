@@ -6,7 +6,7 @@
 
 	if(bmb == null){
 		// 로그인을 안했으면
-		pageContext.forward("/Board1/user/login.jsp");
+		pageContext.forward("./user/login.jsp");
 	}else{
 		// 로그인을 했으면
 		pageContext.forward("/Board1/list.jsp");
