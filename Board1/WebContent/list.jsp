@@ -1,3 +1,4 @@
+<%@page import="java.sql.Statement"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.board1.bean.BoardArticleBean"%>
@@ -17,16 +18,58 @@
 		return;
 	}	//여기까지면 프로그램 실행
 	
+	request.setCharacterEncoding("UTF-8");
+	
+	String pg = request.getParameter("pg");
+	
+	if(pg == null){
+		pg = "1";
+	}
+	
+	// 페이지 관련 
+	int total		= 0;
+	int lastPage	= 0;
+	int listCount	= 0;
+	int currentPg	= Integer.parseInt(pg);
+	int limitBegin	= (currentPg - 1) * 10;
+	int groupCurrent = (int)Math.ceil(currentPg / 10.0);
+	int groupStart 	 = (groupCurrent - 1) * 10 + 1;
+	int groupEnd	 = groupCurrent * 10;
+	
+	
 	// 1, 2단계
 	Connection conn = DBConfig.getConnection();
 	
 	// 3 단계
 	PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_ARTICLE_LIST);
+	psmt.setInt(1, limitBegin);
+	
+	Statement stmt = conn.createStatement();
 	
 	// 4 단계
 	ResultSet rs = psmt.executeQuery();
+	ResultSet rsTotal=stmt.executeQuery(SQL.SELECT_ARTICLE_TOTAL);
 	
 	// 5 단계
+	if(rsTotal.next()){
+		total = rsTotal.getInt(1);
+		
+		if(total % 10 == 0){
+			lastPage = total / 10;
+		}else{
+			lastPage = total / 10 + 1;
+		}
+		
+		if(groupEnd > lastPage){
+			groupEnd = lastPage;
+		}else{
+			
+		}
+		
+		listCount = total - limitBegin;
+		
+	}
+	
 	List<BoardArticleBean> articleList = new ArrayList();
 	
 	while(rs.next()){
@@ -80,8 +123,8 @@
 					
 					<%for(BoardArticleBean bab : articleList){ %>
 					<tr>
-						<td><%=bab.getSeq() %></td>
-						<td><a href="./view.jsp?seq=<%=bab.getSeq()%>"><%=bab.getTitle() %></a>&nbsp;[<%=bab.getComment() %>]</td>
+						<td><%=listCount-- %></td>
+						<td><a href="./view.jsp?seq=<%=bab.getSeq()%>&pg=<%=pg%>"><%=bab.getTitle() %></a>&nbsp;[<%=bab.getComment() %>]</td>
 						<td><%=bab.getNick() %></td>
 						<td><%=bab.getRdate().substring(2, 10) %></td>
 						<td><%=bab.getHit() %></td>
@@ -92,12 +135,21 @@
 			<!-- 페이징 -->
 			<nav class="paging">
 				<span> 
-				<a href="#" class="prev">이전</a>
-				<a href="#" class="num">1</a>
-				<a href="#" class="next">다음</a>
+				<% if(groupStart > 1) {%>
+				<a href="./list.jsp?pg=<%=groupStart - 10 %>" class="prev">이전</a>
+				<% } %>
+				
+				<% for(int p = groupStart; p <= groupEnd; p++) { %>
+				<a href="./list.jsp?pg=<%=p %>" class="num <%= (currentPg == p)? "current":""%>"><%=p %></a>
+				<% } %>
+				
+				<% if(groupEnd < lastPage) { %>
+				<a href="./list.jsp?pg=<%=groupEnd + 1 %>" class="next">다음</a>
+				<% } %>
+				
 				</span>
 			</nav>
-			<a href="/Board1/write.jsp" class="btnWrite">글쓰기</a>
+			<a href="/Board1/write.jsp?pg=<%=pg %>" class="btnWrite">글쓰기</a>
 		</div>
 	</body>
 

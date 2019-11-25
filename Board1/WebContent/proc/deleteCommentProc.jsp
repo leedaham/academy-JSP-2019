@@ -1,3 +1,4 @@
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="kr.co.board1.config.SQL"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="kr.co.board1.config.DBConfig"%>
@@ -7,6 +8,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String seq = request.getParameter("seq");
 	String parent = request.getParameter("parent");
+	String pg = request.getParameter("pg");
 	
 	Connection conn = DBConfig.getConnection();
 	
@@ -24,6 +26,7 @@
 	conn.close();
 	
 	// list 페이지 이동
-	response.sendRedirect("../view.jsp?seq="+parent);
+	response.sendRedirect("../view.jsp?seq="+parent+"&pg="+pg);
+	
 
 %>

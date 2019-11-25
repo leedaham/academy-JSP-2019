@@ -9,7 +9,8 @@
 	request.setCharacterEncoding("UTF-8");
 
 	String seq = request.getParameter("seq");
-
+	String pg = request.getParameter("pg");
+	
 	// 1, 2단계
 	Connection conn = DBConfig.getConnection();
 	
@@ -71,7 +72,7 @@
 						</tr>
 					</table>
 					<div class="btns">
-						<a href="./view.jsp?seq=<%= seq %>" class="cancel">취소</a>
+						<a href="./view.jsp?seq=<%= seq %>&pg=<%=pg%>" class="cancel">취소</a>
 						<input type="submit" class="submit" value="수정완료" />
 					</div>
 				</form>

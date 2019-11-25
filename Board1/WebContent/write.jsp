@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String pg = request.getParameter("pg");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -30,7 +34,7 @@
 						</tr>
 					</table>
 					<div class="btns">
-						<a href="./list.jsp" class="cancel">취소</a>
+						<a href="./list.jsp?pg=<%=pg %>" class="cancel">취소</a>
 						<input type="submit" class="submit" value="작성완료" />
 					</div>
 				</form>

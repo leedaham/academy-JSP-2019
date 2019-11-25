@@ -18,7 +18,7 @@
 	}	//여기까지면 프로그램 실행
 	
 	String seq = request.getParameter("seq");
-	
+	String pg = request.getParameter("pg");
 	
 	// 1, 2단계
 	Connection conn = DBConfig.getConnection();
@@ -132,8 +132,8 @@
 					</table>
 					<div class="btns">
 						<a href="./proc/deleteProc.jsp?seq=<%=seq %>" class="cancel del">삭제</a>
-						<a href="./modify.jsp?seq=<%=seq %>" class="cancel mod">수정</a>
-						<a href="./list.jsp" class="cancel">목록</a>
+						<a href="./modify.jsp?seq=<%=seq %>&pg=<%=pg %>" class="cancel mod">수정</a>
+						<a href="./list.jsp?pg=<%=pg %>" class="cancel">목록</a>
 					</div>
 				</form>
 			</div><!-- view 끝 -->
@@ -150,7 +150,7 @@
 					</span>
 					<textarea><%=comment.getContent() %></textarea>
 					<div>
-						<a href="./proc/deleteCommentProc.jsp?seq=<%=comment.getSeq() %>&parent=<%=comment.getParent() %>" class="del">삭제</a>
+						<a href="./proc/deleteCommentProc.jsp?seq=<%=comment.getSeq() %>&parent=<%=comment.getParent() %>&pg=<%=pg %>" class="del">삭제</a>
 						<a href="#" class="mod">수정</a>
 					</div>
 				</div>
@@ -211,17 +211,11 @@
 							
 							textarea.val('');
 							
-							
-							
 						}
 						
-						
 					});
-					
-					
-					
-					
 				});
+				
 				
 				
 			});
