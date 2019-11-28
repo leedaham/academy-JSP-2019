@@ -13,8 +13,26 @@ public class BoardArticleBean {
 	private String regip;
 	private String rdate;
 	
+
+	
 	// 추가필드
 	private String nick;
+	private String oldName;
+	private	int download;
+	
+	
+	public String getOldName() {
+		return oldName;
+	}
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
 	public String getNick() {
 		return nick;
 	}

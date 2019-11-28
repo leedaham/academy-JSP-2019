@@ -61,11 +61,16 @@
 		bab.setUid(rs.getString(9));
 		bab.setRegip(rs.getString(10));
 		bab.setRdate(rs.getString(11));
+		
+		bab.setOldName(rs.getString(14));
+		bab.setDownload(rs.getInt(16));
+		
 	}
 	
 	
 	
 	List<BoardArticleBean> commentList = new ArrayList<>();
+	
 	while(rsComment.next()){
 		BoardArticleBean comment = new BoardArticleBean();
 		comment.setSeq(rsComment.getInt(1));
@@ -118,8 +123,8 @@
 						<tr>
 							<td>첨부파일</td>
 							<td>
-								<a href="#">테스트.hwp</a>
-								<span>3회 다운로드</span>
+								<a href="./proc/download.jsp?parent=<%=bab.getSeq()%>"><%=bab.getOldName() %></a>
+								<span><%=bab.getDownload() %>회 다운로드</span>
 							</td>
 						</tr>
 						<%} %>
@@ -131,8 +136,10 @@
 						</tr>
 					</table>
 					<div class="btns">
+						<% if(bab.getUid().equals(bmb.getUid())){ %>
 						<a href="./proc/deleteProc.jsp?seq=<%=seq %>" class="cancel del">삭제</a>
 						<a href="./modify.jsp?seq=<%=seq %>&pg=<%=pg %>" class="cancel mod">수정</a>
+						<%} %>
 						<a href="./list.jsp?pg=<%=pg %>" class="cancel">목록</a>
 					</div>
 				</form>
@@ -150,8 +157,10 @@
 					</span>
 					<textarea><%=comment.getContent() %></textarea>
 					<div>
+						<% if(comment.getUid().equals(bmb.getUid())) { %>
 						<a href="./proc/deleteCommentProc.jsp?seq=<%=comment.getSeq() %>&parent=<%=comment.getParent() %>&pg=<%=pg %>" class="del">삭제</a>
 						<a href="#" class="mod">수정</a>
+						<% } %>
 					</div>
 				</div>
 				<%} %>
@@ -184,6 +193,21 @@
 				$('.comment_write input[type=submit]').click(function(e){
 					e.preventDefault();
 					
+					// 댓글 리스트에 들어갈 문자열 HTML 생성
+					var html = "<div class='comment'>"
+										+"<span>"
+											+"<span class='nick'></span>"
+											+"<span class='rdate'></span>"
+										+"</span>"
+										+"<textarea></textarea>"
+										+"<div>"
+											+"<a href='#' class='del'>삭제</a> "
+											+"<a href='#' class='mod'>수정</a>"
+										+"</div>"
+									+"</div>";
+					//문자열 html을 제이쿼리 DOM 객체로 생성
+					var dom = $($.parseHTML(html));
+					
 					// 태그객체 생성
 					var comments = $('section.comments');
 					
@@ -211,6 +235,15 @@
 							
 							textarea.val('');
 							
+							dom.find('.nick').text(data.nick);
+							dom.find('.rdate').text(data.rdate);
+							dom.find('textarea').text(data.comment);
+							
+							comments.append(dom);
+							
+							if($('.empty').is(':visible')){
+								$('.empty').remove();
+							}
 						}
 						
 					});

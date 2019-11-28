@@ -51,7 +51,7 @@
 		<div id="board">
 			<h3>글쓰기</h3>
 			<div class="write">
-				<form action="./proc/modifyProc.jsp" method="post">
+				<form action="./proc/modifyProc.jsp?pg=<%=pg %>" method="post">
 				<input type="hidden" name="seq" value="<%=seq %>"/>
 					<table>
 						<tr>

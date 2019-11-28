@@ -13,6 +13,7 @@
 	String content	=request.getParameter("content");
 	
 	String seq = request.getParameter("seq");
+	String pg = request.getParameter("pg");
 	
 	BoardMemberBean bmb = (BoardMemberBean)session.getAttribute("member");
 	String uid = bmb.getUid();
@@ -34,5 +35,5 @@
 	conn.close();
 	
 	// list 페이지 이동
-	response.sendRedirect("../view.jsp?seq="+seq);
+	response.sendRedirect("../view.jsp?seq="+seq+"&pg="+pg);
 %>
