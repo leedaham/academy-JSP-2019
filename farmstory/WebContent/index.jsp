@@ -1,5 +1,68 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.co.farmstory.bean.BoardArticleBean"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="kr.co.farmstory.config.SQL"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="kr.co.farmstory.config.DBConfig"%>
+<%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	// 1, 2단계
+	Connection conn = DBConfig.getConnection();
+	// 3단계
+	PreparedStatement psmt1 = conn.prepareStatement(SQL.SELECR_LATEST_BOARD);
+	psmt1.setString(1, "grow");
+	PreparedStatement psmt2 = conn.prepareStatement(SQL.SELECR_LATEST_BOARD);
+	psmt2.setString(1, "school");
+	PreparedStatement psmt3 = conn.prepareStatement(SQL.SELECR_LATEST_BOARD);
+	psmt3.setString(1, "story");
+	
+	// 4단계
+	ResultSet rs1 = psmt1.executeQuery();
+	ResultSet rs2 = psmt2.executeQuery();
+	ResultSet rs3 = psmt3.executeQuery();
+	
+	// 5단계
+	List<BoardArticleBean> latest1 = new ArrayList<>();
+	List<BoardArticleBean> latest2 = new ArrayList<>();
+	List<BoardArticleBean> latest3 = new ArrayList<>();
+	
+	while(rs1.next()){
+		BoardArticleBean bab = new BoardArticleBean();
 
+		bab.setTitle(rs1.getString(1));
+		bab.setRdate(rs1.getString(2));
+		
+		latest1.add(bab);
+	}
+	while(rs2.next()){
+		BoardArticleBean bab = new BoardArticleBean();
+
+		bab.setTitle(rs2.getString(1));
+		bab.setRdate(rs2.getString(2));
+		
+		latest2.add(bab);
+	}
+	while(rs3.next()){
+		BoardArticleBean bab = new BoardArticleBean();
+
+		bab.setTitle(rs3.getString(1));
+		bab.setRdate(rs3.getString(2));
+		
+		latest3.add(bab);
+	}
+	
+	// 6단계
+	rs3.close();
+	rs2.close();
+	rs1.close();
+	psmt3.close();
+	psmt2.close();
+	psmt1.close();
+	conn.close();
+
+%>
 <%@ include file = "./_header.jsp" %>
 
 <main>
@@ -27,93 +90,39 @@
             <img src="/farmstory/img/main_latest1_tit.png" alt="텃밭가꾸기">
             <img src="/farmstory/img/main_latest1_img.jpg" alt="이미지">
             <table border="0">
+            	<% for(BoardArticleBean bab : latest1) { %>
                 <tr>
                     <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
+                    <td><%=bab.getTitle() %></td>
+                    <td><%=bab.getRdate().substring(2, 10) %></td>
                 </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
+                <%} %>
             </table>
         </article>
         <article>
             <img src="/farmstory/img/main_latest2_tit.png" alt="귀농학교">
             <img src="/farmstory/img/main_latest2_img.jpg" alt="이미지">
             <table border="0">
+                <% for(BoardArticleBean bab : latest2) { %>
                 <tr>
                     <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
+                    <td><%=bab.getTitle() %></td>
+                    <td><%=bab.getRdate().substring(2, 10) %></td>
                 </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
+                <%} %>
             </table>
         </article>
         <article>
             <img src="/farmstory/img/main_latest3_tit.png" alt="농장물이야기">
             <img src="/farmstory/img/main_latest3_img.jpg" alt="이미지">
             <table border="0">
+                <% for(BoardArticleBean bab : latest3) { %>
                 <tr>
                     <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
+                    <td><%=bab.getTitle() %></td>
+                    <td><%=bab.getRdate().substring(2, 10) %></td>
                 </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
-                <tr>
-                    <td>></td>
-                    <td>토마토! 건강하게 길러서 안심하고 먹자.</td>
-                    <td>19-10-22</td>
-                </tr>
+                <%} %>
             </table>
         </article>
     </div>
@@ -130,9 +139,9 @@
                 </ul>
             </div>
             <div>
-                <a href="/farmstory/comunity/qna.jsp"><img src="/farmstory/img/main_sub2_cs_bt1.png" alt="1:1교객문의"></a>
-                <a href="/farmstory/comunity/faq.jsp"><img src="/farmstory/img/main_sub2_cs_bt2.png" alt="자주묻는질문"></a>
-                <a href="#"><img src="/farmstory/img/main_sub2_cs_bt3.png" alt="배송 조희"></a>
+                <a href="/farmstory/board/list.jsp?cate=qna&group=community"><img src="/farmstory/img/main_sub2_cs_bt1.png" alt="1:1교객문의"></a>
+                <a href="/farmstory/board/list.jsp?cate=faq&group=community"><img src="/farmstory/img/main_sub2_cs_bt2.png" alt="자주묻는질문"></a>
+                <a href="https://service.epost.go.kr/iservice/usr/trace/usrtrc001k01.jsp" target="_blank"><img src="/farmstory/img/main_sub2_cs_bt3.png" alt="배송 조희"></a>
             </div>
         </article>
         <article>

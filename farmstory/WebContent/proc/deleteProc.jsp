@@ -9,6 +9,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String seq = request.getParameter("seq");
 	String cate = request.getParameter("cate");
+	String group = request.getParameter("group");
 	
 	Connection conn = DBConfig.getConnection();
 	
@@ -45,6 +46,6 @@
 	conn.close();
 	
 	// list 페이지 이동
-	response.sendRedirect("/farmstory/board/list.jsp?cate="+cate);
+	response.sendRedirect("/farmstory/board/list.jsp?cate="+cate+"&group="+group);
 
 %>

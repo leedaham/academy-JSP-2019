@@ -10,12 +10,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 
-	BoardMemberBean bmb = (BoardMemberBean) session.getAttribute("member");
+	//BoardMemberBean bmb = (BoardMemberBean) session.getAttribute("member");
 	
-	if(bmb == null){
-		response.sendRedirect("./user/login.jsp");
-		return;
-	}	//여기까지면 프로그램 실행
+	//if(bmb == null){
+	//	response.sendRedirect("./user/login.jsp");
+	//	return;
+	//}	//여기까지면 프로그램 실행
 	
 	String cate = request.getParameter("cate");
 	String seq = request.getParameter("seq");
@@ -94,21 +94,15 @@
 	psmtView.close();
 	psmtHit.close();
 	conn.close();
-	// 6 단계
 	
+	
+	String group = request.getParameter("group");
+	String asideView = "./_aside_"+group+".jsp";
 %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>글보기</title> 
-		<link rel="stylesheet" href="/Board1/css/style.css" />
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-	</head>
-	<body>
+<%@ include file="../_header.jsp" %>
+<jsp:include page="<%= asideView%>">
+	<jsp:param value="<%=cate%>" name="cate"/>
+</jsp:include>
 		<div id="board">
 			<h3>글보기</h3>
 			<div class="view">
@@ -138,10 +132,10 @@
 					</table>
 					<div class="btns">
 						<% if(bab.getUid().equals(bmb.getUid())){ %>
-						<a href="../proc/deleteProc.jsp?seq=<%=seq %>&cate=<%=cate%>" class="cancel del">삭제</a>
-						<a href="/farmstory/board/modify.jsp?seq=<%=seq %>&pg=<%=pg %>&cate=<%=cate%>" class="cancel mod">수정</a>
+						<a href="../proc/deleteProc.jsp?seq=<%=seq %>&cate=<%=cate%>&group=<%=group%>" class="cancel del">삭제</a>
+						<a href="/farmstory/board/modify.jsp?seq=<%=seq %>&pg=<%=pg %>&cate=<%=cate%>&group=<%=group%>" class="cancel mod">수정</a>
 						<%} %>
-						<a href="./list.jsp?cate=<%=cate %>" class="cancel">목록</a>
+						<a href="./list.jsp?cate=<%=cate %>&group=<%=group%>" class="cancel">목록</a>
 					</div>
 				</form>
 			</div><!-- view 끝 -->
@@ -257,10 +251,7 @@
 			</script>
 			
 		</div><!-- board 끝 -->
-	</body>
-
-</html>
-
+<%@ include file="../_footer.jsp" %>
 
 
 

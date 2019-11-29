@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String group = request.getParameter("group");
+%>
 <%@ include file = "../_header.jsp" %>
         <section class="sub cate1">
             <div>
@@ -8,8 +11,8 @@
                 <aside class="lnb">
                     <img src="/farmstory/img/sub_aside_cate1_tit.png" alt="팜스토리소개">
                     <ul>
-                        <li class="on"><a href="/farmstory/introduction/hello.jsp">인사말</a></li>
-                        <li><a href="/farmstory/introduction/direction.jsp">찾아오시는길</a></li>
+                        <li class="on"><a href="/farmstory/introduction/hello.jsp?group=<%=group%>">인사말</a></li>
+                        <li><a href="/farmstory/introduction/direction.jsp?group=<%=group%>">찾아오시는길</a></li>
                     </ul>
                 </aside>
                 <article class="content">

@@ -2,35 +2,19 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cate = request.getParameter("cate");
+	String group = request.getParameter("group");
+	String asideView = "./_aside_"+group+".jsp";
 %>
 <%@ include file="../_header.jsp" %>
-<section class="sub cate3">
-    <div>
-        <img src="/farmstory/img/sub_top_tit3.png" alt="CROP TALK">
-    </div>
-    <div>
-        <aside class="lnb">
-            <img src="/farmstory/img/sub_aside_cate3_tit.png" alt="농작물이야기">
-            <ul>
-                <li class="on"><a href="/farmstory/board/list.jsp?cate=story">농작물이야기</a></li>
-                <li><a href="/farmstory/board/list.jsp?cate=grow">텃밭가꾸기</a></li>
-                <li><a href="/farmstory/board/list.jsp?cate=school">귀농학교</a></li>
-            </ul>
-        </aside>
-        <article class="content">
-            <nav>
-                <img src="/farmstory/img/sub_nav_tit_cate3_tit1.png" alt="농작물이야기">
-                <p>
-                    HOME > 농작물이야기 > <span>농작물이야기</span>
-                </p>
-            </nav>
-
-            <!-- 컨텐츠 내용 시작 -->
+<jsp:include page="<%= asideView%>">
+	<jsp:param value="<%=cate%>" name="cate"/>
+</jsp:include>
 			<div id="board">
 				<h3>글쓰기</h3>
 				<div class="write">
 					<form action="/farmstory/proc/writeProc.jsp" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="cate" value=<%=cate %>>
+					<input type="hidden" name="group" value=<%=group %>>
 						<table>
 							<tr>
 								<td>제목</td>
@@ -50,7 +34,7 @@
 							</tr>
 						</table>
 						<div class="btns">
-							<a href="/farmstory/board/list.jsp?cate=<%=cate %>" class="cancel">취소</a>
+							<a href="/farmstory/board/list.jsp?cate=<%=cate %>&group=<%=group %>" class="cancel">취소</a>
 							<input type="submit" class="submit" value="작성완료" />
 						</div>
 					</form>

@@ -12,6 +12,8 @@
 	String title	=request.getParameter("subject");
 	String content	=request.getParameter("content");
 	
+	String cate = request.getParameter("cate");
+	String group = request.getParameter("group");
 	String seq = request.getParameter("seq");
 	String pg = request.getParameter("pg");
 	
@@ -35,5 +37,5 @@
 	conn.close();
 	
 	// list 페이지 이동
-	response.sendRedirect("../view.jsp?seq="+seq+"&pg="+pg);
+	response.sendRedirect("../board/view.jsp?seq="+seq+"&pg="+pg+"&group="+group+"&cate="+cate);
 %>

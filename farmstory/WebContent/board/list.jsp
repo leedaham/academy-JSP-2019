@@ -20,6 +20,7 @@
 */	
 	request.setCharacterEncoding("UTF-8");
 	
+	String group  = request.getParameter("group");
 	String cate  = request.getParameter("cate");
 	String pg	 = request.getParameter("pg");
 	
@@ -46,11 +47,13 @@
 	psmt.setString(1, cate);
 	psmt.setInt(2, limitBegin);
 	
-	Statement stmt = conn.createStatement();
+	PreparedStatement psmtTotal = conn.prepareStatement(SQL.SELECT_ARTICLE_TOTAL);
+	psmtTotal.setString(1, cate);
+	
 	
 	// 4 단계
 	ResultSet rs = psmt.executeQuery();
-	ResultSet rsTotal=stmt.executeQuery(SQL.SELECT_ARTICLE_TOTAL);
+	ResultSet rsTotal=psmtTotal.executeQuery();
 	
 	// 5 단계
 	if(rsTotal.next()){
@@ -100,33 +103,14 @@
 	conn.close();
 	// 6 단계
 	
+	String asideView = "./_aside_"+group+".jsp";
+	
 %>
 <%@ include file="../_header.jsp" %>
-    <section class="sub cate3">
-    <div>
-        <img src="/farmstory/img/sub_top_tit3.png" alt="CROP TALK">
-    </div>
-    <div>
-        <aside class="lnb">
-            <img src="/farmstory/img/sub_aside_cate3_tit.png" alt="농작물이야기">
-            <ul>
-                <li class="on"><a href="/farmstory/board/list.jsp?cate=story">농작물이야기</a></li>
-                <li><a href="/farmstory/board/list.jsp?cate=grow">텃밭가꾸기</a></li>
-                <li><a href="/farmstory/board/list.jsp?cate=school">귀농학교</a></li>
-            </ul>
-        </aside>
-        <article class="content">
-            <nav>
-                <img src="/farmstory/img/sub_nav_tit_cate3_tit1.png" alt="농작물이야기">
-                <p>
-                    HOME > 농작물이야기 > <span>농작물이야기</span>
-                </p>
-            </nav>
-
-            <!-- 컨텐츠 내용 시작 -->
-
-
-
+<jsp:include page="<%= asideView%>">
+	<jsp:param value="<%=cate%>" name="cate"/>
+</jsp:include>
+    
 			<div id="board">
 				<h3>글목록</h3>
 				<!-- 리스트 -->
@@ -144,7 +128,7 @@
 						<%for(BoardArticleBean bab : articleList){ %>
 						<tr>
 							<td><%=listCount-- %></td>
-							<td><a href="./view.jsp?seq=<%=bab.getSeq()%>&pg=<%=pg%>&cate=<%=cate%>"><%=bab.getTitle() %></a>&nbsp;[<%=bab.getComment() %>]</td>
+							<td><a href="./view.jsp?seq=<%=bab.getSeq()%>&pg=<%=pg%>&cate=<%=cate%>&group=<%=group%>"><%=bab.getTitle() %></a>&nbsp;[<%=bab.getComment() %>]</td>
 							<td><%=bab.getNick() %></td>
 							<td><%=bab.getRdate().substring(2, 10) %></td>
 							<td><%=bab.getHit() %></td>
@@ -156,20 +140,20 @@
 				<nav class="paging">
 					<span> 
 					<% if(groupStart > 1) {%>
-					<a href="./list.jsp?pg=<%=groupStart - 10 %>" class="prev">이전</a>
+					<a href="./list.jsp?pg=<%=groupStart - 10 %>&group=<%=group%>&cate=<%=cate%>" class="prev">이전</a>
 					<% } %>
 					
 					<% for(int p = groupStart; p <= groupEnd; p++) { %>
-					<a href="./list.jsp?pg=<%=p %>" class="num <%= (currentPg == p)? "current":""%>"><%=p %></a>
+					<a href="./list.jsp?pg=<%=p %>&group=<%=group%>&cate=<%=cate%>" class="num <%= (currentPg == p)? "current":""%>"><%=p %></a>
 					<% } %>
 					
 					<% if(groupEnd < lastPage) { %>
-					<a href="./list.jsp?pg=<%=groupEnd + 1 %>" class="next">다음</a>
+					<a href="./list.jsp?pg=<%=groupEnd + 1 %>&group=<%=group%>&cate=<%=cate%>" class="next">다음</a>
 					<% } %>
 					
 					</span>
 				</nav>
-				<a href="/farmstory/board/write.jsp?cate=<%=cate %>" class="btnWrite">글쓰기</a>
+				<a href="/farmstory/board/write.jsp?cate=<%=cate %>&group=<%=group %>" class="btnWrite">글쓰기</a>
 			</div>
 
 			<!-- 컨텐츠 내용 끝 -->

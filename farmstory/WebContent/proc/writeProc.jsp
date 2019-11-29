@@ -26,6 +26,7 @@
 	String content = mr.getParameter("content");
 	String fileName = mr.getFilesystemName("file");	
 	String cate = mr.getParameter("cate");
+	String group = mr.getParameter("group");
 	String regip = request.getRemoteAddr();
 	
 	BoardMemberBean bmb = (BoardMemberBean)session.getAttribute("member");
@@ -126,5 +127,5 @@
 	}
 
 	// list 페이지 이동
-	response.sendRedirect("/farmstory/board/list.jsp?cate="+cate);
+	response.sendRedirect("/farmstory/board/list.jsp?cate="+cate+"&group="+group);
 %>

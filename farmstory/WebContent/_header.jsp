@@ -30,6 +30,15 @@
 		if(code =='101'){
 			alert('회원정보가 잘못 되었습니다. \n다시 확인하시기 바랍니다.')
 		}
+		
+		
+		$(function() {
+			$('.gnb > li:nth-child(1)').click(function(e){
+				e.preventDefault();
+				$(this).addClass('on');
+			});
+		});
+		
 	</script>
 </head>
 <body>
@@ -52,14 +61,14 @@
                 <% }else{ %>
                 <a href="/farmstory/user/logout.jsp">Logout</a>|
                 <%} %>
-                <a href="#">Contact us</a>|
+                <a href="/farmstory/board/list.jsp?cate=qna&group=community">Contact us</a>|
             </p>
             <img src="/farmstory/img/head_txt_img.png" alt="3만원 이상 무료패송, 팜카드 10% 적립">
             <ul class="gnb">
-                <li><a href="/farmstory/introduction/hello.jsp">팜스토리소개</a></li>
-                <li><a href="/farmstory/market/market.jsp"><img src="/farmstory/img/head_menu_badge.png" alt="30%"> 장보기</a></li>
-                <li><a href="/farmstory/board/list.jsp?cate=story">농작물이야기</a></li>
-                <li><a href="/farmstory/event/event.jsp">이벤트</a></li>
-                <li><a href="/farmstory/comunity/notice.jsp">커뮤니티</a></li>
+                <li><a href="/farmstory/introduction/hello.jsp?group=introduction">팜스토리소개</a></li>
+                <li><a href="/farmstory/market/market.jsp?group=market"><img src="/farmstory/img/head_menu_badge.png" alt="30%"> 장보기</a></li>
+                <li><a href="/farmstory/board/list.jsp?group=croptalk&cate=story">농작물이야기</a></li>
+                <li><a href="/farmstory/board/list.jsp?group=event&cate=event">이벤트</a></li>
+                <li><a href="/farmstory/board/list.jsp?group=community&cate=notice">커뮤니티</a></li>
             </ul>
         </header>

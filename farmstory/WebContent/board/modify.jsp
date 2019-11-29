@@ -40,19 +40,18 @@
 	rs.close();
 	psmtModify.close();
 	conn.close();
+	
+	String group = request.getParameter("group");
+	String asideView = "./_aside_"+group+".jsp";
 %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>글 수정</title> 
-		<link rel="stylesheet" href="/Board1/css/style.css" />
-	</head>
-	<body>
+<%@ include file="../_header.jsp" %>
+<jsp:include page="<%= asideView%>">
+	<jsp:param value="<%=cate%>" name="cate"/>
+</jsp:include>
 		<div id="board">
 			<h3>글쓰기</h3>
 			<div class="write">
-				<form action="/farmstory/proc/modifyProc.jsp?pg=<%=pg %>&cate=<%=cate%>" method="post">
+				<form action="/farmstory/proc/modifyProc.jsp?pg=<%=pg %>&cate=<%=cate%>&group=<%=group%>" method="post">
 				<input type="hidden" name="seq" value="<%=seq %>"/>
 					<table>
 						<tr>
@@ -73,13 +72,12 @@
 						</tr>
 					</table>
 					<div class="btns">
-						<a href="./view.jsp?seq=<%= seq %>&pg=<%=pg%>&cate=<%=cate%>" class="cancel">취소</a>
+						<a href="./view.jsp?seq=<%= seq %>&pg=<%=pg%>&cate=<%=cate%>&group=<%=group%>" class="cancel">취소</a>
 						<input type="submit" class="submit" value="수정완료" />
 					</div>
 				</form>
 			</div>
 		</div>
-	</body>
-</html>
+<%@ include file="../_footer.jsp" %>
 
 
