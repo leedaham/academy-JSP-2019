@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -25,9 +26,13 @@
 
 				<nav>
 					<a href="/farmstory2/index.do">HOME |</a>
+					<c:if test="${bmv eq null}">
 					<a href="/farmstory2/user/terms.do">회원가입 |</a>
 					<a href="/farmstory2/user/login.do">로그인 |</a>
+					</c:if>
+					<c:if test="${bmv ne null}">
 					<a href="#">로그아웃 |</a>
+					</c:if>
 					<a href="/farmstory2/community/qna.do">고객센터</a>
 				</nav>
 
