@@ -23,12 +23,14 @@ public class SQL {
 	public static final String SELECT_CHECK_HP 		= "SELECT COUNT(*) FROM `BOARD_MEMBER` WHERE `hp`=?";
 	
 	// 게시물 관련
-	public static final String SELECT_ARTICLE_TOTAL = "SELECT COUNT(*) FROM `BOARD_ARTICLE` WHERE `parent`=0;";
+	public static final String SELECR_LATEST_BOARD = "SELECT `title`, SUBSTRING(`rdate`, 3, 8) FROM `BOARD_ARTICLE` WHERE `cate`=? ORDER BY `seq` DESC LIMIT 5";
+	
+	public static final String SELECT_ARTICLE_TOTAL = "SELECT COUNT(*) FROM `BOARD_ARTICLE` WHERE `parent`=0 AND `cate`=?";
 	
 	public static final String SELECT_ARTICLE_LIST = "SELECT a.*, b.nick FROM `BOARD_ARTICLE` AS a "
 												   + "JOIN `BOARD_MEMBER` AS b "
 												   + "ON a.uid = b.uid "
-												   + "WHERE a.parent = 0 "
+												   + "WHERE a.parent = 0 AND cate=? "
 												   + "ORDER BY seq DESC "
 												   + "LIMIT ?, 10;";
 	

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file = "./_header.jsp" %>
 
 			<section class="main">
@@ -37,31 +38,13 @@
 						<a href="#"><img src="img/main_latest1_tit.png" alt="텃밭가꾸기" /></a>
 						<img src="img/main_latest1_img.jpg" alt="열매이미지" />
 						<table>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
+							<c:forEach var="article" items="${latests1}">
+								<tr>
+									<td>></td>
+									<td>${article.title}</td>
+									<td>${article.rdate}</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 
@@ -69,31 +52,13 @@
 						<a href="#"><img src="img/main_latest2_tit.png" alt="텃밭가꾸기" /></a>
 						<img src="img/main_latest2_img.jpg" alt="열매이미지" />
 						<table>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
+							<c:forEach var="article" items="${latests2}">
+								<tr>
+									<td>></td>
+									<td>${article.title}</td>
+									<td>${article.rdate}</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 
@@ -101,31 +66,13 @@
 						<a href="#"><img src="img/main_latest3_tit.png" alt="텃밭가꾸기" /></a>
 						<img src="img/main_latest3_img.jpg" alt="열매이미지" />
 						<table>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
-							<tr>
-								<td>></td>
-								<td>안녕하세요. 반갑습니다. HELLO~</td>
-								<td>17-01-20</td>
-							</tr>
+							<c:forEach var="article" items="${latests3}">
+								<tr>
+									<td>></td>
+									<td>${article.title}</td>
+									<td>${article.rdate}</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 

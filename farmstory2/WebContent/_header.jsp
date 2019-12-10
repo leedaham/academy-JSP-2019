@@ -11,7 +11,7 @@
 	<body>
 		<div id="wrapper">
 
-			<!-- 오른쪽 고정배너 -->
+			<!-- 오른쪽 고정배너 -->	
 			<div id="banner">
 				<img src="/farmstory2/img/float_banner_tit.png" alt="10% 적립혜택" />
 				<img src="/farmstory2/img/float_banner_txt.png" alt="장보기" />
@@ -26,13 +26,15 @@
 
 				<nav>
 					<a href="/farmstory2/index.do">HOME |</a>
-					<c:if test="${bmv eq null}">
+					<c:choose>
+						<c:when test="${sessionScope.user eq null}">
 					<a href="/farmstory2/user/terms.do">회원가입 |</a>
 					<a href="/farmstory2/user/login.do">로그인 |</a>
-					</c:if>
-					<c:if test="${bmv ne null}">
-					<a href="#">로그아웃 |</a>
-					</c:if>
+						</c:when>
+						<c:otherwise>
+					<a href="/farmstory2/user/logout.do">로그아웃 |</a>
+						</c:otherwise>
+					</c:choose>
 					<a href="/farmstory2/community/qna.do">고객센터</a>
 				</nav>
 

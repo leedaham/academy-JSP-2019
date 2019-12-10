@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.farmstory2.config.DBConfig;
 import kr.co.farmstory2.config.SQL;
-import kr.co.farmstory2.vo.BoardMemberVO;
+import kr.co.farmstory2.vo.UserVO;
 
 public class UserDAO {
 	private static UserDAO instance = new UserDAO();
@@ -20,7 +20,7 @@ public class UserDAO {
 	private UserDAO() {}
 
 	// 로그인
-	public BoardMemberVO selectUser(String uid, String pw) throws Exception{
+	public UserVO selectUser(String uid, String pw) throws Exception{
 		// 1, 2단계
 		Connection conn = DBConfig.getConnection();
 		
@@ -33,24 +33,24 @@ public class UserDAO {
 		ResultSet rs = psmt.executeQuery();
 		
 		String redirect = null;
-		BoardMemberVO bmv = null;
+		UserVO uv = null;
 		// 5단계
 		if(rs.next()){
 					
 			// 회원이 있으면 (비밀번호에 해당하는 회원이 있으면)
-			bmv = new BoardMemberVO();
-			bmv.setUid(rs.getString(1));
-			bmv.setPass(rs.getString(2));
-			bmv.setName(rs.getString(3));
-			bmv.setNick(rs.getString(4));
-			bmv.setEmail(rs.getString(5));
-			bmv.setHp(rs.getString(6));
-			bmv.setGrade(rs.getInt(7));
-			bmv.setZip(rs.getString(8));
-			bmv.setAddr1(rs.getString(9));
-			bmv.setAddr2(rs.getString(10));
-			bmv.setRegip(rs.getString(11));
-			bmv.setRdate(rs.getString(12));
+			uv = new UserVO();
+			uv.setUid(rs.getString(1));
+			uv.setPass(rs.getString(2));
+			uv.setName(rs.getString(3));
+			uv.setNick(rs.getString(4));
+			uv.setEmail(rs.getString(5));
+			uv.setHp(rs.getString(6));
+			uv.setGrade(rs.getInt(7));
+			uv.setZip(rs.getString(8));
+			uv.setAddr1(rs.getString(9));
+			uv.setAddr2(rs.getString(10));
+			uv.setRegip(rs.getString(11));
+			uv.setRdate(rs.getString(12));
 		}
 			
 		
@@ -59,26 +59,26 @@ public class UserDAO {
 		psmt.close();
 		conn.close();
 		
-		return bmv;
+		return uv;
 	}
 
 
-	public void insertUser( BoardMemberVO bmv ) throws Exception {
+	public void insertUser( UserVO uv ) throws Exception {
 		// 1, 2
 		Connection conn = DBConfig.getConnection();
 		
 		// 3
 		PreparedStatement psmt = conn.prepareStatement(SQL.INSERT_USER);
-		psmt.setString(1, bmv.getUid());
-		psmt.setString(2, bmv.getPass());
-		psmt.setString(3, bmv.getName());
-		psmt.setString(4, bmv.getNick());
-		psmt.setString(5, bmv.getEmail());
-		psmt.setString(6, bmv.getHp());
-		psmt.setString(7, bmv.getZip());
-		psmt.setString(8, bmv.getAddr1());
-		psmt.setString(9, bmv.getAddr2());
-		psmt.setString(10, bmv.getRegip());
+		psmt.setString(1, uv.getUid());
+		psmt.setString(2, uv.getPass());
+		psmt.setString(3, uv.getName());
+		psmt.setString(4, uv.getNick());
+		psmt.setString(5, uv.getEmail());
+		psmt.setString(6, uv.getHp());
+		psmt.setString(7, uv.getZip());
+		psmt.setString(8, uv.getAddr1());
+		psmt.setString(9, uv.getAddr2());
+		psmt.setString(10, uv.getRegip());
 		
 		// 4
 		psmt.executeUpdate();

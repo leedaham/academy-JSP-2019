@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <footer>
-				<img src="./img/footer_logo.png" alt="푸터로고" />
+				<img src="/farmstory2/img/footer_logo.png" alt="푸터로고" />
 
 				<p>
 					(주)더조은 / 사업자번호 123-45-67890 / 통신판매신고 제 2013호 / 등록번호 더조은1234 / 발행인 : 홍길동

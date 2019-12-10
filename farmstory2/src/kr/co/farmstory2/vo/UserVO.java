@@ -1,6 +1,6 @@
 package kr.co.farmstory2.vo;
 
-public class BoardMemberVO {
+public class UserVO {
 	private String uid;
 	private String pass;
 	private String name;

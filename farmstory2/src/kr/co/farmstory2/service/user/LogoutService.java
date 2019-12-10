@@ -15,7 +15,7 @@ public class LogoutService implements CommonService{
 		
 		session.invalidate();
 		
-		return "redirect:/farmstory2/user/login.do";
+		return "redirect:/farmstory2/index.do";
 	}
 
 }
