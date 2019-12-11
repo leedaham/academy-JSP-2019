@@ -1,19 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file = "../_header.jsp" %>
 		<section class="sub">
 			<div class="bg">
-				<img src="../img/sub_top_tit1.png" alt="INTRODUCTION" />
+				<img src="${path}/img/sub_top_tit1.png" alt="INTRODUCTION" />
 			</div>
 			<div>
 				<aside>
-					<img src="../img/sub_aside_cate1_tit.png" alt="팜스토리소개" />
+					<img src="${path}/img/sub_aside_cate1_tit.png" alt="팜스토리소개" />
 
 					<ul class="pg1">
 						<li class="on">
-							<a href="hello.html"><strong>인사말</strong></a>
+							<a href="${path}/introduction/hello.do?group=introduction&cate=hello"><strong>인사말</strong></a>
 						</li>
 						<li>
-							<a href="direction.html"><strong>찾아오시는길</strong></a>
+							<a href="${path}/introduction/direction.do?group=introduction&cate=direction"><strong>찾아오시는길</strong></a>
 						</li>
 					</ul>
 
@@ -21,7 +23,7 @@
 
 				<article>
 					<nav>
-						<img src="../img/sub_nav_tit_cate1_tit1.png" alt="인사말" />
+						<img src="${path}/img/sub_nav_tit_cate1_hello.png" alt="인사말" />
 						<span>HOME > 팜스토리소개 > <strong>인사말</strong></span>
 					</nav>
 

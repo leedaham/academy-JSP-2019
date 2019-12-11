@@ -37,7 +37,7 @@ img {
 	margin-left: 4px;
 }
 
-#banner > img:nth-child(2) {
+#banner > a > img {
 	margin-top: 5px;
 }
 

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ include file = "./_header.jsp" %>
 
 			<section class="main">
@@ -28,14 +29,14 @@
 
 				<!-- 바로가기 배너영역 -->
 				<article class="quick">
-					<a href="#"><img src="img/main_banner_sub1_tit.png" alt="오늘의 식단" /></a>
-					<a href="#"><img src="img/main_banner_sub2_tit.png" alt="나도 요리사" /></a>
+					<a href="${path}/board/list.do?group=community&cate=menu"><img src="img/main_banner_sub1_tit.png" alt="오늘의 식단" /></a>
+					<a href="${path}/board/list.do?group=community&cate=chef"><img src="img/main_banner_sub2_tit.png" alt="나도 요리사" /></a>
 				</article>
 
 				<!-- 최신글 리스트 영역 -->
 				<article class="latest">
 					<div>
-						<a href="#"><img src="img/main_latest1_tit.png" alt="텃밭가꾸기" /></a>
+						<a href="${path}/board/list.do?group=croptalk&cate=grow"><img src="img/main_latest1_tit.png" alt="텃밭가꾸기" /></a>
 						<img src="img/main_latest1_img.jpg" alt="열매이미지" />
 						<table>
 							<c:forEach var="article" items="${latests1}">
@@ -49,7 +50,7 @@
 					</div>
 
 					<div>
-						<a href="#"><img src="img/main_latest2_tit.png" alt="텃밭가꾸기" /></a>
+						<a href="${path}/board/list.do?group=croptalk&cate=school"><img src="img/main_latest2_tit.png" alt="귀농학교" /></a>
 						<img src="img/main_latest2_img.jpg" alt="열매이미지" />
 						<table>
 							<c:forEach var="article" items="${latests2}">
@@ -63,7 +64,7 @@
 					</div>
 
 					<div>
-						<a href="#"><img src="img/main_latest3_tit.png" alt="텃밭가꾸기" /></a>
+						<a href="${path}/board/list.do?group=croptalk&cate=story"><img src="img/main_latest3_tit.png" alt="농작물이야기" /></a>
 						<img src="img/main_latest3_img.jpg" alt="열매이미지" />
 						<table>
 							<c:forEach var="article" items="${latests3}">
@@ -100,9 +101,9 @@
 							</ul>
 						</div>
 						<div>
-							<a href="#"><img src="img/main_sub2_cs_bt1.png" alt="1:1고객문의" /></a>
-							<a href="#"><img src="img/main_sub2_cs_bt2.png" alt="자주묻는 질문" /></a>
-							<a href="#"><img src="img/main_sub2_cs_bt3.png" alt="배송조회" /></a>
+							<a href="${path}/board/list.do?group=community&cate=qna"><img src="img/main_sub2_cs_bt1.png" alt="1:1고객문의" /></a>
+							<a href="${path}/board/list.do?group=community&cate=faq"><img src="img/main_sub2_cs_bt2.png" alt="자주묻는 질문" /></a>
+							<a href="https://service.epost.go.kr/iservice/usr/trace/usrtrc001k01.jsp" target="_blank"><img src="img/main_sub2_cs_bt3.png" alt="배송조회" /></a>
 						</div>
 					</div>
 
