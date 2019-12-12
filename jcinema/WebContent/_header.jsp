@@ -36,22 +36,22 @@
                         <a href="#">구독하기</a>
                     </p>
                     <p>
-                        <a href="${path}/member/login.do">로그인</a>
-                        <a href="${path}/member/register.do">회원가입</a>
-                        <a href="${path}/member/my-cinema.do">멤버십</a>
+                        <a href="${path}/member/login">로그인</a>
+                        <a href="${path}/member/register">회원가입</a>
+                        <a href="${path}/member/my-cinema">멤버십</a>
                         <a href="#">고객센터</a>
                     </p>
                 </article>
             </div>
             <div class="logo">
                 <article>
-                    <a href="${path}/index.do"><img src="${path}/img/logo.gif" alt=""></a>
+                    <a href="${path}"><img src="${path}/img/logo.gif" alt=""></a>
                 </article>                
             </div>
             <div class="gnb">
                 <article>
                     <ul>
-                        <li><a href="${path}/ticketing/choice-movie.do">예매</a></li>
+                        <li><a href="${path}/ticketing/choice-movie">예매</a></li>
                         <li><a href="#">영화</a></li>
                         <li><a href="#">영화관</a></li>
                         <li><a href="#">이벤트</a></li>

@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>jcinema</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>_index.jsp</welcome-file>
   </welcome-file-list>
   
   
@@ -18,7 +18,7 @@
   <!-- 		필터 액션주소 설정 		-->
   <filter-mapping>
   	<filter-name>CharacterEncodingFilter</filter-name>
-  	<url-pattern>*.do</url-pattern>
+  	<url-pattern>/</url-pattern>
   </filter-mapping>
   
   
@@ -30,7 +30,19 @@
   <!--		서블릿 액션주소 설정		 -->
   <servlet-mapping>
   	<servlet-name>MainController</servlet-name>
-  	<url-pattern>*.do</url-pattern>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <!-- img, css, js등 자원 리소스를 컨트롤러에서 제외 -->
+  <servlet-mapping>
+  	<servlet-name>default</servlet-name>
+  	<url-pattern>*.js</url-pattern>
+  	<url-pattern>*.css</url-pattern>
+  	<url-pattern>*.jpg</url-pattern>
+  	<url-pattern>*.gif</url-pattern>
+  	<url-pattern>*.png</url-pattern>
+  	<url-pattern>*.ico</url-pattern>
+  	<url-pattern>*.swf</url-pattern>
   </servlet-mapping>
   
   

@@ -1,6 +1,63 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file ="../_header.jsp" %>
-        
+<script>
+
+	$(document).ready(function(){
+			$('#btnRegister').click(function(e){
+				e.preventDefault();
+				
+				var name = $('input[name=name]').val();
+				var uid = $('input[name=uid]').val();
+				var pw1= $('input[name=pw1]').val();
+				var pw2= $('input[name=pw2]').val();
+				var email = $('input[name=email]').val();
+				var tel1 = $('select[name=tel1]').val();
+				var tel2 = $('input[name=tel2]').val();
+				var tel3 = $('input[name=tel3]').val();
+				var hp1 = $('select[name=hp1]').val();
+				var hp2 = $('input[name=hp2]').val();
+				var hp3 = $('input[name=hp3]').val();
+				var addrT = $('input[name=addrType]:checked').val();
+				var zip = $('input[name=zip]').val();
+				var addr1 = $('input[name=addr1]').val();
+				var addr2 = $('input[name=addr2]').val();
+				
+				// 데이터 유효성 검증
+				
+				// 데이터 전송하기
+				var jsonData = {
+					'name': name,
+					'uid': uid,
+					'pw1': pw1,
+					'email': email,
+					'tel1': tel1,
+					'tel2': tel2,
+					'tel3': tel3,
+					'hp1': hp1,
+					'hp2': hp2,
+					'hp3': hp3,
+					'addrType': addrT,
+					'zip': zip,
+					'addr1': addr1,
+					'addr2': addr2
+				};
+				
+				$.ajax({
+					url: '/jcinema/member/register',
+					type: 'post',
+					data: jsonUserData,
+					dataType:'json',
+					success: function(data){
+						alert(data.result);
+						location.href='/jcinema/member/login';						
+					}
+				});
+				
+			});
+		
+	});
+	
+</script>        
         <div id="sub" class="register">
             <section>
                 <div class="agreement"">
@@ -155,7 +212,7 @@
 
                     <div>
                         <a href="#" class="btn cancel">취소</a>
-                        <a href="#" class="btn register">회원가입</a>
+                        <a href="jcinema/member/login" id="btnRegister" class="btn register">회원가입</a>
                     </div>
 
                 </div>
