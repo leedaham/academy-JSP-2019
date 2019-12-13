@@ -46,7 +46,7 @@
   </servlet-mapping>
   
   
-  	<!-- 보안설정 -->
+  	<!-- JSP 모델2 보안설정 -->
 	<security-constraint>
 		<display-name>JSP Protection</display-name>
 		<web-resource-collection>
