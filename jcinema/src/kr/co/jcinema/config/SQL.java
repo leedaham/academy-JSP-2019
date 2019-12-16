@@ -2,7 +2,7 @@ package kr.co.jcinema.config;
 
 public class SQL {
 	// 회원 관련
-	public static final String SELECT_LOGIN = "SELECT * FROM `JC_MEMBER` WHERE `uid`=? AND `pass`=PASSWORD(?);";
+	public static final String SELECT_LOGIN = "SELECT * FROM `JC_MEMBER` WHERE `user_id`=? AND `user_pass`=PASSWORD(?);";
 	public static final String INSERT_MEMBER  = "INSERT INTO `JC_MEMBER` SET "
 								  			+ "`user_id`=?,"
 								  			+ "`user_pass`=PASSWORD(?),"
@@ -10,7 +10,7 @@ public class SQL {
 								  			+ "`user_email`=?,"
 								  			+ "`user_tel`=?,"
 								  			+ "`user_hp`=?,"
-								  			+ "`user_grade`=2,"
+								  			+ "`user_grade`=?,"
 								  			+ "`user_point`=100,"
 								  			+ "`user_addr_type`=?,"
 								  			+ "`user_zip`=?,"
@@ -18,13 +18,25 @@ public class SQL {
 								  			+ "`user_addr_detail`=?,"
 								  			+ "`user_regip`=?,"
 								  			+ "`user_rdate`=NOW()";
+
+	public static final String UPDATE_MEMBER = "UPDATE `JC_MEMBER` SET "
+											 + "`user_pass`=PASSWORD(?),"
+											 + "`user_name`=?,"
+											 + "`user_tel`=?,"
+											 + "`user_addr_type`=?,"
+											 + "`user_zip`=?,"
+											 + "`user_addr_main`=?,"
+											 + "`user_addr_detail`=?,"
+											 + "`user_agree_point`=?,"
+											 + "`user_agree_site`=? "
+											 + "WHERE `user_id`=?";
 	
-	public static final String SELECT_TERMS = "SELECT * FROM `JC_TERMS` ;";
-	public static final String SELECT_CHECK_UID 	= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `uid`=?";
+	public static final String SELECT_CHECK_UID 	= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `user_id`=?";
+	
 	public static final String SELECT_CHECK_NICK 	= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `nick`=?";
 	public static final String SELECT_CHECK_EMAIL 	= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `email`=?";
 	public static final String SELECT_CHECK_HP 		= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `hp`=?";
-	
+	public static final String SELECT_TERMS = "SELECT * FROM `JC_TERMS` ;";
 	// 게시물 관련
 	public static final String SELECT_ARTICLE_TOTAL = "SELECT COUNT(*) FROM `JC_ARTICLE` WHERE `parent`=0;";
 	
