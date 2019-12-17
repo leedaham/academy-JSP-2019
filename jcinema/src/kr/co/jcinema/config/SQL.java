@@ -37,6 +37,17 @@ public class SQL {
 	public static final String SELECT_CHECK_EMAIL 	= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `email`=?";
 	public static final String SELECT_CHECK_HP 		= "SELECT COUNT(*) FROM `JC_MEMBER` WHERE `hp`=?";
 	public static final String SELECT_TERMS = "SELECT * FROM `JC_TERMS` ;";
+	
+	
+	// 티켓 예매
+	// 영화 관련
+	public static final String SELECT_POSTERS = "SELECT `movie_no`, `movie_title`, `movie_poster` FROM `JC_MOVIE` ORDER BY `movie_release_date` DESC LIMIT 10"; 
+	
+	
+	
+	
+	
+	
 	// 게시물 관련
 	public static final String SELECT_ARTICLE_TOTAL = "SELECT COUNT(*) FROM `JC_ARTICLE` WHERE `parent`=0;";
 	

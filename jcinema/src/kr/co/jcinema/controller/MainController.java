@@ -100,8 +100,9 @@ public void requestProc(HttpServletRequest req, HttpServletResponse resp) throws
 			String redirectUrl = result.substring(9);
 			resp.sendRedirect(redirectUrl);
 			
-		}else if(result.startsWith("{")) {	
+		}else if(result.startsWith("{") || result.startsWith("[")) {	
 			// JSON Ãâ·Â
+			resp.setContentType("application/json;charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			out.print(result);
 			

@@ -1,5 +1,60 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file ="./_header.jsp" %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<style>
+/* bxSlider 커스텀 */
+	.bx-wrapper {
+		max-width: none !important;
+		box-shadow: none;
+    	border: none;
+	}
+</style>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script>
+
+	// 상단배너
+	$(function(){
+		
+		
+		
+	});
+	
+	// 예매순위
+	$(function(){});
+	
+	// 슬라이드 배너
+	$(function(){});
+
+	// 영화 포스터 배너
+	$(function(){
+		var posterUl = $('.poster > article > ul');
+		
+		$.ajax({
+			url:'/jcinema/movie/posters',
+			type:'get',
+			dataType:'json',
+			success:function(data){
+				// alert(data.length);
+				for(var i=0; i<data.length ; i++){
+					posterUl.append(
+							"<li><a href='/jcinema/movie/detail?movie_no="+data[i].movie_no+"'><img src='/jcinema/resource/poster/"+data[i].movie_poster+"' alt='"+data[i].movie_title+"'></a></li>"
+							);	
+				}
+				// bxSlider로 실행
+				posterUl.bxSlider({
+					slideWidth: '188px',
+					minSlides: 5,
+					maxSlides: 5,
+					moveSlides: 1,
+					auto:true,
+					pause:3000,
+					controls: false,
+					pager: false
+				});
+			}
+		});
+	});
+</script>
         <main>
             <div class="slider">
                 <div>
@@ -80,11 +135,7 @@
             <div class="poster">
                 <article>
                     <ul>
-                        <li><a href="#"><img src="./img/poster_banner_img1.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/poster_banner_img2.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/poster_banner_img3.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/poster_banner_img4.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/poster_banner_img5.jpg" alt=""></a></li>
+                        
                     </ul>
                 </article>
             </div>
