@@ -45,7 +45,10 @@ public class SQL {
 	
 	
 	
-	
+	// 관리자 페이지
+	// 관리자 API
+	public static final String SELECT_THEATER = "SELECT `theater_no`, `theater_local_code`, `theater_name` FROM `JC_THEATER` WHERE `theater_city`=?";
+	public static final String SELECT_SCREEN = "SELECT * FROM `JC_SCREEN` WHERE `screen_theater_no`=?";
 	
 	
 	// 게시물 관련
