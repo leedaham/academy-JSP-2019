@@ -10,6 +10,8 @@ import kr.co.jcinema.admin.vo.ScreenVO;
 import kr.co.jcinema.admin.vo.TheaterVO;
 import kr.co.jcinema.config.DBConfig;
 import kr.co.jcinema.config.SQL;
+import kr.co.jcinema.config.SQL_ADMIN;
+import kr.co.jcinema.vo.MovieVO;
 
 public class AdminApiDAO {
 
@@ -25,7 +27,7 @@ public class AdminApiDAO {
 		Connection conn = DBConfig.getConnection();
 		
 		
-		PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_THEATER);
+		PreparedStatement psmt = conn.prepareStatement(SQL_ADMIN.SELECT_THEATER);
 		psmt.setString(1, city);
 		
 		ResultSet rs =  psmt.executeQuery();
@@ -51,7 +53,7 @@ public class AdminApiDAO {
 		
 		Connection conn = DBConfig.getConnection();
 		
-		PreparedStatement psmt = conn.prepareStatement(SQL.SELECT_SCREEN);
+		PreparedStatement psmt = conn.prepareStatement(SQL_ADMIN.SELECT_SCREEN);
 		
 		psmt.setString(1, theater_no);
 		
@@ -77,4 +79,43 @@ public class AdminApiDAO {
 		return screens;
 	}
 	
+public List<MovieVO> selectMovies(String title) throws Exception {
+		
+		Connection conn = DBConfig.getConnection();
+		
+		PreparedStatement psmt = conn.prepareStatement(SQL_ADMIN.SELECT_MOVIE);
+		
+		psmt.setString(1, "%"+title+"%");
+		
+		ResultSet rs =  psmt.executeQuery();
+		
+		List<MovieVO> movies = new ArrayList<>();
+		
+		while(rs.next()) {
+			MovieVO mvo = new MovieVO();
+			
+			mvo.setMovie_no(rs.getInt(1));
+			mvo.setMovie_title(rs.getString(2));
+			mvo.setMovie_grade(rs.getString(3));
+			mvo.setMovie_company(rs.getString(4));
+			mvo.setMovie_score(rs.getDouble(5));
+			mvo.setMovie_release_date(rs.getString(6));
+			mvo.setMovie_genre(rs.getString(7));
+			mvo.setMovie_country(rs.getString(8));
+			mvo.setMovie_running_time(rs.getInt(9));
+			mvo.setMovie_homepage(rs.getString(10));
+			mvo.setMovie_poster(rs.getString(11));
+			mvo.setMovie_desc(rs.getString(12));
+			mvo.setMovie_director(rs.getString(13));
+			mvo.setMovie_actor(rs.getString(14));
+			
+			movies.add(mvo);
+		}
+		
+		rs.close();
+		psmt.close();
+		conn.close();
+		
+		return movies;
+	}
 }

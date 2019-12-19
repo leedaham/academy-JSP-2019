@@ -8,21 +8,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import kr.co.jcinema.admin.dao.AdminApiDAO;
-import kr.co.jcinema.admin.vo.ScreenVO;
-import kr.co.jcinema.admin.vo.TheaterVO;
 import kr.co.jcinema.controller.CommonService;
+import kr.co.jcinema.vo.MovieVO;
 
-public class ScreenService implements CommonService{
+public class MoviesService implements CommonService{
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		
-		String theater_no = req.getParameter("theater_no");
+		String title = req.getParameter("title");
 		
 		AdminApiDAO dao = AdminApiDAO.getInstance();
-		List<ScreenVO> screens = dao.selectScreen(theater_no);
+		List<MovieVO> movies = dao.selectMovies(title);
 		
-		String json = new Gson().toJson(screens);
+		String json = new Gson().toJson(movies);
 		
 		return json;
 	}

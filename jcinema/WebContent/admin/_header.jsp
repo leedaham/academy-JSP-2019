@@ -45,6 +45,7 @@
 		                            <ol>
 		                                <li><a href="#">영화현황</a></li>
 		                                <li><a href="${path}/admin/movie/register">영화등록</a></li>                                
+		                                <li><a href="${path}/admin/movie/schedule">상영일정등록</a></li>                                
 		                            </ol>
 		                        </li>
 		                        <li>

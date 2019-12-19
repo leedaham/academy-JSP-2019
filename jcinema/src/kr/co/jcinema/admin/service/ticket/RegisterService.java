@@ -9,12 +9,7 @@ public class RegisterService implements CommonService{
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-//		if() {
-//			
-//		}else {
-//			
-//		}
-		
+
 		
 		return "/admin/ticket/register.jsp";
 	}
