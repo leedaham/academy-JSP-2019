@@ -59,7 +59,7 @@
 		                            <a href="#"><i class="fa fa-ticket" aria-hidden="true"></i>티켓관리</a>
 		                            <ol>
 		                                <li><a href="#">티켓현황</a></li>
-		                                <li><a href="${path}/admin/ticket/register">티켓등록</a></li>                                
+		                                <li><a href="${path}/admin/ticket/generate">티켓생성</a></li>                                
 		                            </ol>
 		                        </li>
 		                        <li>

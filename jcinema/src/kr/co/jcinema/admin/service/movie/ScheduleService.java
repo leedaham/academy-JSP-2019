@@ -34,7 +34,7 @@ public class ScheduleService implements CommonService{
 			AdminMovieDAO dao = AdminMovieDAO.getInstance();
 			dao.insertMovieSchedule(msv);
 			
-			return "redirect:/jcinema/admin/schedule";
+			return "redirect:/jcinema/admin/movie/schedule";
 		}else {
 			return "/admin/movie/schedule.jsp";
 		}

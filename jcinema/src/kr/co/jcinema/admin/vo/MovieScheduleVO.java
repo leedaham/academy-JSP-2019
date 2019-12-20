@@ -8,8 +8,16 @@ public class MovieScheduleVO {
 	private String schedule_start_time; //12:00
 	private String schedule_end_time;	//15:00
 	private String schedule_round_view;
+	private String movie_title;
 	
 	
+	
+	public String getMovie_title() {
+		return movie_title;
+	}
+	public void setMovie_title(String movie_title) {
+		this.movie_title = movie_title;
+	}
 	public String getSchedule_theater_no() {
 		return schedule_theater_no;
 	}
