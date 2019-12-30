@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.co.jcinema.admin.vo.MovieScheduleVO;
 import kr.co.jcinema.admin.vo.ScreenVO;
@@ -19,10 +21,61 @@ public class AdminApiDAO {
 	private static	AdminApiDAO instance = new AdminApiDAO();
 	
 	public static AdminApiDAO getInstance() {
+		
 		return instance;
 	}
 	
 	private AdminApiDAO() {}
+	
+	public Map<String, List<TheaterVO>> selectTheaters() throws Exception {
+		
+		Connection conn = DBConfig.getConnection();
+		PreparedStatement psmt = conn.prepareStatement(SQL_ADMIN.SELECT_THEATERS);
+		
+		ResultSet rs = psmt.executeQuery();
+		
+		Map<String, List<TheaterVO>> map = new HashMap<>();
+		List<TheaterVO> list = null;
+		
+		boolean isStart = true;
+		int totalListCount = 0;
+		
+		while(rs.next()) {
+			
+			if(isStart) {
+				list = new ArrayList<TheaterVO>();
+				isStart = false;
+			}
+			
+			TheaterVO tvo = new TheaterVO();
+			
+			String city = rs.getString(4);
+			int count = rs.getInt(8);
+			
+			tvo.setTheater_no(rs.getInt(1));
+			tvo.setTheater_local_code(rs.getInt(2));
+			tvo.setTheater_name(rs.getString(3));
+			tvo.setTheater_city(rs.getString(4));
+			tvo.setTheater_addr(rs.getString(5));
+			tvo.setTheater_tel(rs.getString(6));
+			tvo.setTheater_screen_count(rs.getInt(7));
+			
+			list.add(tvo);
+			totalListCount++;
+			
+			if(totalListCount == count) {
+				map.put(city, list);
+				totalListCount = 0;
+				isStart = true;
+			}
+		}
+		
+		rs.close();
+		psmt.close();
+		conn.close();
+		
+		return map;
+	}
 	
 	public List<TheaterVO> selectTheater(String city) throws Exception {
 		Connection conn = DBConfig.getConnection();
@@ -100,15 +153,16 @@ public class AdminApiDAO {
 			mvo.setMovie_grade(rs.getString(3));
 			mvo.setMovie_company(rs.getString(4));
 			mvo.setMovie_score(rs.getDouble(5));
-			mvo.setMovie_release_date(rs.getString(6));
-			mvo.setMovie_genre(rs.getString(7));
-			mvo.setMovie_country(rs.getString(8));
-			mvo.setMovie_running_time(rs.getInt(9));
-			mvo.setMovie_homepage(rs.getString(10));
-			mvo.setMovie_poster(rs.getString(11));
-			mvo.setMovie_desc(rs.getString(12));
-			mvo.setMovie_director(rs.getString(13));
-			mvo.setMovie_actor(rs.getString(14));
+			mvo.setMovie_ticket_rate(rs.getDouble(6));
+			mvo.setMovie_release_date(rs.getString(7));
+			mvo.setMovie_genre(rs.getString(8));
+			mvo.setMovie_country(rs.getString(9));
+			mvo.setMovie_running_time(rs.getInt(10));
+			mvo.setMovie_homepage(rs.getString(11));
+			mvo.setMovie_poster(rs.getString(12));
+			mvo.setMovie_desc(rs.getString(13));
+			mvo.setMovie_director(rs.getString(14));
+			mvo.setMovie_actor(rs.getString(15));
 			
 			movies.add(mvo);
 		}

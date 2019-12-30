@@ -9,9 +9,9 @@
     </nav>
                         
     <article>
-        <form action="#">
-        	<input type="text" name="theater_no" />
-        	<input type="text" name="screen_no" />
+        <form action="/jcinema/admin/ticket/generate" method="post">
+        	<input type="hidden" name="theater_no" />
+        	<input type="hidden" name="screen_no" />
         
             <div class="field">
                 <label for="theater_city">영화관</label>
@@ -55,7 +55,7 @@
             
             <div class="field">
                 <label for="movie_no">영화</label>
-                <input type="text" name="movie_no" readonly="readonly" />
+                <input type="hidden" name="movie_no" readonly="readonly" />
                 <input type="text" name="movie_title" readonly="readonly" />
             </div>
             

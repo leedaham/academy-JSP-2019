@@ -15,6 +15,14 @@ public class MovieVO {
 	private String movie_desc;
 	private String movie_director;
 	private String movie_actor;
+	private double movie_ticket_rate;
+	
+	public double getMovie_ticket_rate() {
+		return movie_ticket_rate;
+	}
+	public void setMovie_ticket_rate(double movie_ticket_rate) {
+		this.movie_ticket_rate = movie_ticket_rate;
+	}
 	public int getMovie_no() {
 		return movie_no;
 	}

@@ -50,8 +50,15 @@ $(document).ready(function(){
         // 날짜
         if(today > lastDate.getDate()){
             today = 1;
+            
+            if(month == 11){
+            	month = 0;
+            	year = year+1;
+            }
         }
-
+        
+        $(this).attr('data-date', year+"-"+(month+1)+"-"+today);
+        
         $(this).children().last().text(today++);
 
     }); // each 끝
@@ -66,7 +73,10 @@ $(document).ready(function(){
         
         $a.parent().removeClass('on');
         $(this).parent().addClass('on');
-
+        
+        // 날짜입력 필드에 선택한 날짜 입력
+        var today = $(this).children().eq(1).text();
+        $('input[name=movie_date]').val(year+'-'+(month+1)+'-'+today);
     });
 
 });
