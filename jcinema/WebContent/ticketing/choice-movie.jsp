@@ -86,7 +86,7 @@
 			var schedule_date = $('input[name=movie_date]').val();
 			var schedule_theater_no = $('input[name=theater_no]').val();
 			
-			var showtime_round_view = $('.showtime .round_view');
+			var showtime_section_div = $('.showtime > article > section > div');
 			var showtime_nodata = $('.showtime .nodata');
 			
 			var url = "/jcinema/api/movies-schedule";
@@ -97,26 +97,50 @@
 			$.get(url, param, function(data){
 				if(data.length > 0){
 					showtime_nodata.remove();
-					showtime_round_view.empty();
+					showtime_section_div.empty();
 					
-					$.each(data, function(i, obj){
-						showtime_round_view.append("<li>"+
-											       "<a href='#'>"+
-												   "<span>"+obj.schedule_round_view+"회차</span>"+
-							  	 				   "<span>"+obj.schedule_start_time.substring(0,5)+"~"+obj.schedule_end_time.substring(0,5)+"</span>"+
-												   "<span><em></em>석/<em>80</em>석</span>"+
-												   "</a>"+
-												   "</li>"
-								);
+					for(var a=0; a<data.length; a++){
 						
-					});
+						showtime_section_div.append("<ul class='round_view'></ul>");
+						
+						var dataObj = data[a];
+						
+						for(var b=0; b<dataObj.length; b++){
+							showtime_section_div.children().last().append("<li>"+
+												       		   			  "<a href='#' data-theater-no='"+dataObj[b].schedule_theater_no+
+												       		   			  "' data-screen-no='"+dataObj[b].schedule_screen_no+
+												       		   			  "' data-movie-no='"+dataObj[b].schedule_movie_no+
+												       		   			  "' data-movie-date='"+dataObj[b].schedule_date+
+												       		   			  "' data-round-view='"+dataObj[b].schedule_round_view+"'>"+
+													   		   	 		  "<span>"+dataObj[b].schedule_round_view+"회차</span>"+
+								  	 				   		   			  "<span>"+dataObj[b].schedule_start_time.substring(0,5)+"~"+dataObj[b].schedule_end_time.substring(0,5)+"</span>"+
+													   	       			  "<span><em></em>석/<em>80</em>석</span>"+
+													   	       			  "</a>"+
+													   		   			  "</li>");
+						}
+					}
+					
 				}
 				
 			});
-			
 		});
 		
+		// 영화 상영 회차 클릭(동적태그 이벤트)
+		$(document).on('click', '.round_view > li > a', function(e){
+			
+			var theater_no =$(this).attr('data-theater-no');
+			var screen_no  =$(this).attr('data-screen-no');
+			var movie_date =$(this).attr('data-movie-date');
+			var movie_no   =$(this).attr('data-movie-no');
+			var round_view =$(this).attr('data-round-view');
+			
+			location.href = '/jcinema/ticketing/choice-seat?theater_no='+theater_no+'&screen_no='+screen_no+'&movie_date='+movie_date+'&movie_no='+movie_no+'&round_view='+round_view;
+			
+		});
+			
 		
+		
+				
 		
 		
 		$.ajax({
@@ -290,11 +314,8 @@
                 <h1>상영시간<span>예고편 상영 등으로 시작이 10여분 정도 차이 날 수 있습니다.</span></h1>
 
                 <p class="nodata">상영시간이 조회되지 않습니다.</p>
-               	<ul class="round_view">
-					
-				</ul>
-                
-
+               	<div>
+               	</div>
             </section>               
             
 

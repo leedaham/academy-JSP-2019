@@ -46,12 +46,16 @@ public class SQL {
 			  											+ "WHERE a.schedule_theater_no=? AND a.schedule_date=? "
 			  											+ "GROUP BY a.schedule_movie_no "
 			  											+ "ORDER BY b.movie_ticket_rate DESC, b.movie_release_date DESC";
+	
+	public static final String SELECT_MOVIE = "SELECT * FROM `JC_MOVIE` WHERE `movie_no`=?";
+	
 	public static final String SELECT_MOVIES_ROUND_VIEW = "SELECT * FROM `JC_MOVIE_SCHEDULE` "
 														+ "WHERE `schedule_date`=? "
 														+ "AND `schedule_theater_no`=? "
 														+ "AND `schedule_movie_no`=? "
 														+ "ORDER BY `schedule_screen_no` ASC, "
 																 + "`schedule_round_view` ASC";
+	
 	public static final String SELECT_REMAIN_SEAT_WITH_TOTAL = "SELECT COUNT(*) AS `total`, SUM(`ticket_is_valid` = 1) AS `remain` "
 															 + "FROM `JC_TICKET` "
 															 + "WHERE `ticket_movie_date`=? "
@@ -60,11 +64,38 @@ public class SQL {
 															 + "AND `ticket_screen_no`=? "
 															 + "GROUP BY `ticket_round_view`";
 	
+	public static final String SELECT_SEAT = "SELECT a.*, b.ticket_is_valid FROM `JC_SEAT` AS a "
+										   + "JOIN `JC_TICKET` AS b "
+										   + "ON CONCAT(a.seat_row, a.seat_column) = b.ticket_seat "
+										   + "WHERE a.seat_theater_no=? "
+										   + "AND a.seat_screen_no=? "
+										   + "AND b.ticket_screen_no=? "
+										   + "AND b.ticket_movie_date=? "
+										   + "AND b.ticket_round_view=? "
+										   + "AND b.ticket_movie_no=?";
+	
+	public static final String SELECT_SEAT_TOTAL_BY_ROW ="SELECT *, COUNT(`seat_row`) AS `row_total` FROM `JC_SEAT` "
+														+ "WHERE `seat_theater_no`=? "
+														+ "AND `seat_screen_no`=? "
+														+ "GROUP BY `seat_row`";
 	
 	// 영화 관련
 	public static final String SELECT_POSTERS = "SELECT `movie_no`, `movie_title`, `movie_poster` FROM `JC_MOVIE` ORDER BY `movie_release_date` DESC LIMIT 10"; 
 	
-
+	public static final String SELECT_MOVIE_SCHEDULE_WITH_THEATER ="SELECT a.*, b.theater_name, c.screen_name FROM `JC_MOVIE_SCHEDULE` AS a "
+													 			  + "JOIN `JC_THEATER` AS b "
+													 			  	+ "ON "
+													 			  	+ "a.schedule_theater_no = b.theater_no "
+													 			  + "JOIN `JC_SCREEN` AS c "
+													 			  	+ "ON "
+													 			  	+ "a.schedule_theater_no = c.screen_theater_no AND "
+													 			  	+ "a.schedule_screen_no = c.screen_no "
+													 			  + "WHERE a.schedule_movie_no=? "
+													 			  	+ "AND a.schedule_theater_no=? "
+													 			  	+ "AND a.schedule_screen_no=? "
+													 			  	+ "AND a.schedule_date=? "
+													 			  	+ "AND a.schedule_round_view=?";
+													 
 	
 	
 	

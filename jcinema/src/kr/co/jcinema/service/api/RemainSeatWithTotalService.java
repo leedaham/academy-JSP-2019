@@ -19,7 +19,6 @@ public class RemainSeatWithTotalService implements CommonService{
 		String ticketMovieNo = req.getParameter("ticket_movie_no");
 		String ticketTheaterNo = req.getParameter("ticket_theater_no");
 		String ticketScreenNo = req.getParameter("ticket_screen_no");
-		String ticketRoundView = req.getParameter("ticket_round_view");
 		
 		MovieDAO dao = MovieDAO.getInstance();
 		List<List<Integer>> seats = dao.selectRemainSeatWithTotal(	ticketMovieDate,

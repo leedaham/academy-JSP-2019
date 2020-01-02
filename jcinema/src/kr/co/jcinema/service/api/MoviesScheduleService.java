@@ -23,7 +23,7 @@ public class MoviesScheduleService implements CommonService{
 		
 		
 		MovieDAO dao = MovieDAO.getInstance();
-		List<MovieScheduleVO> movies = dao.selectMovieRoundView(schedule_date, theater_no, movie_no);
+		List<List<MovieScheduleVO>> movies = dao.selectMovieRoundView(schedule_date, theater_no, movie_no);
 		
 		String json = new Gson().toJson(movies);
 		
