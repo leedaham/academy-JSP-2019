@@ -2,7 +2,7 @@
 
 ### 📆 *2019.10 - 2019.12*
 
-📘 최범균*, **[『최범균의 JSP2.3 웹프로그래밍 기초부터 중급까지』](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=70129886)**, 가메출판사*
+📘 최범균, **[『최범균의 JSP2.3 웹프로그래밍 기초부터 중급까지』](https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=70129886)**, 가메출판사
 
 # English
 
